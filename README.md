@@ -1,96 +1,69 @@
 Automated Advertisement Generation System
-
-Overview
-The Automated Advertisement Generation System is an advanced platform designed to revolutionize advertisement production by automating the creation of high-quality audio and video content. Leveraging state-of-the-art AI technologies for text-to-speech and speech recognition, this system integrates seamlessly with Airtable for data management and Google Drive for media storage, delivering an efficient and scalable solution for generating professional advertisements.
-This project showcases a sophisticated blend of performance-optimized C++ and flexible Python implementations, demonstrating technical versatility and the ability to tackle complex, real-world challenges with cutting-edge tools.
-Features
-
-High-Quality Audio Generation: Produces natural-sounding speech from text using Tacotron 2 and WaveGlow, powered by LibTorch (C++) and PyTorch (Python).
-Accurate Speech Transcription: Employs Whisper for precise audio-to-text conversion, enabling automated subtitle generation (ONNX Runtime in C++, Transformers in Python).
-Seamless Media Integration: Combines audio and video streams with FFmpeg (C++) or MoviePy (Python) to create polished advertisement videos.
-Efficient Data Management: Integrates with Airtable to fetch, update, and manage project data in real time.
-Scalable Storage Solution: Uploads generated media files to Google Drive for reliable, accessible storage.
-Asynchronous Task Processing: Utilizes Redis (C++) and Celery (Python) for efficient, scalable task queuing and execution.
-API-Driven Workflow: Exposes webhook endpoints for seamless integration with external systems, such as Airtable webhooks.
-
-Architecture
-The system is engineered with a modular, dual-component architecture to balance performance and flexibility:
-
-C++ Service: Optimized for speed and efficiency, this service leverages Crow as a lightweight web server, Redis for task queuing, and high-performance AI inference with LibTorch (Tacotron 2, WaveGlow) and ONNX Runtime (Whisper). It is ideal for deployment in resource-constrained or performance-critical environments.
-
-Python Service: Built for ease of development and rapid prototyping, this service uses Flask as the web server, Celery for task queuing, and integrates Python libraries like Transformers and MoviePy for AI-driven media processing. It excels in environments requiring extensive customization and integration with Python ecosystems.
+An advanced platform for automating high-quality audio and video advertisement production using state-of-the-art AI, with seamless integrations for data management and media storage.
 
 
-Both services expose a /webhook endpoint to receive requests, queue tasks asynchronously via Redis or Celery, process them using AI and media tools, and update results in Airtable while uploading outputs to Google Drive.
-Technologies Used
+🚀 Overview
+The Automated Advertisement Generation System revolutionizes ad production by automating the creation of professional audio and video content. Powered by cutting-edge AI for text-to-speech and speech recognition, it integrates with Airtable for data management and Google Drive for media storage, offering an efficient, scalable solution.
+This project demonstrates a powerful combination of performance-optimized C++ and flexible Python, showcasing technical versatility and real-world problem-solving with modern tools.
+
+✨ Features
+High-Quality Audio Generation: Natural-sounding speech from text using Tacotron 2 and WaveGlow (LibTorch in C++, PyTorch in Python).
+Accurate Speech Transcription: Precise audio-to-text conversion with Whisper for automated subtitles (ONNX Runtime in C++, Transformers in Python).
+Seamless Media Integration: Combines audio and video with FFmpeg (C++) or MoviePy (Python) for polished ad videos.
+Efficient Data Management: Real-time project data handling via Airtable API.
+Scalable Storage: Uploads media to Google Drive for reliable storage.
+Asynchronous Processing: Scalable task queuing with Redis (C++) and Celery (Python).
+API-Driven Workflow: Webhook endpoints for integration with external systems like Airtable.
+
+🏗️ Architecture
+The system features a modular, dual-component design for performance and flexibility:
+C++ Service: Optimized for speed using Crow (web server), Redis (task queuing), and AI inference with LibTorch (Tacotron 2, WaveGlow) and ONNX Runtime (Whisper). Ideal for resource-constrained environments.
+Python Service: Built for rapid development with Flask (web server), Celery (task queuing), and Python libraries like Transformers and MoviePy. Perfect for customization and Python ecosystems.
+Both services expose a /webhook endpoint, queue tasks via Redis/Celery, process them with AI and media tools, and update results in Airtable while uploading outputs to Google Drive.
+
+🛠️ Technologies
 Programming Languages
-
-C++: For performance-critical components.
-Python: For flexible, rapid development.
-
+C++: Performance-critical components.
+Python: Flexible, rapid development.
 Web Frameworks
-
 Crow (C++): Lightweight HTTP server.
-Flask (Python): Simple and extensible web framework.
-
+Flask (Python): Simple, extensible web framework.
 Task Queuing
-
-Redis (C++): High-speed task queuing and messaging.
+Redis (C++): High-speed task queuing.
 Celery (Python): Distributed task queue with Redis broker.
-
-AI Models and Libraries
-
-Tacotron 2 and WaveGlow: Text-to-speech generation (LibTorch in C++, PyTorch in Python).
+AI Models & Libraries
+Tacotron 2 & WaveGlow: Text-to-speech (LibTorch in C++, PyTorch in Python).
 Whisper: Speech recognition (ONNX Runtime in C++, Transformers in Python).
-
 Media Processing
-
-FFmpeg (C++): Efficient audio and video merging.
-MoviePy (Python): Pythonic video editing and subtitle integration.
-
+FFmpeg (C++): Audio and video merging.
+MoviePy (Python): Video editing and subtitle integration.
 Integrations
-
-Airtable API: Data management and real-time updates.
-Google Drive API: Media file storage and sharing.
-
+Airtable API: Data management.
+Google Drive API: Media storage.
 Additional Libraries
-
-libcurl, Boost.Asio, spdlog (C++): HTTP requests, async operations, and logging.
-OpenCV, Tenacity (Python): Video processing and robust retries.
-
-Installation and Setup
+C++: libcurl, Boost.Asio, spdlog (HTTP, async, logging).
+Python: OpenCV, Tenacity (video processing, retries).
+📦 Installation & Setup
 Prerequisites
-
-Redis: Install and run Redis server (redis-server).
-Airtable: Obtain an API key, base ID, and table name.
-Google Drive: Set up API credentials with access to a target folder.
-
-C++ Service Setup
-
+Redis: Install and run Redis server.
+Airtable: Get API key, base ID, and table name.
+Google Drive: Set up API credentials with folder access.
+C++ Service
+Install Dependencies: Crow, Redis++, libcurl, JsonCpp, LibTorch, ONNX Runtime, spdlog, Boost (use apt, brew, or compile from source).
+Compile: Use g++ with appropriate include/library paths.
+Run: Execute the compiled binary.
+Python Service
 Install Dependencies:
-Crow, Redis++, libcurl, JsonCpp, LibTorch, ONNX Runtime, spdlog, Boost.
-Use a package manager (e.g., apt, brew) or compile from source.
+pip install flask celery redis airtable-python-wrapper google-api-python-client torch transformers moviepy opencv-python tenacity
 
 
-Compile:g++ -o automated automated.cpp -std=c++17 -I/path/to/headers -L/path/to/libs -lcrow -lredis++ -lcurl -ljsoncpp -ltorch -lonnxruntime -lspdlog -lboost_system
+Configure Celery: Ensure Redis is running (redis://localhost:6379/0).
+Run:
+python automated.py
 
 
-Run:./automated
-
-
-
-Python Service Setup
-
-Install Dependencies:pip install flask celery redis airtable-python-wrapper google-api-python-client torch transformers moviepy opencv-python tenacity
-
-
-Configure Celery:Ensure Redis is running as the broker (redis://localhost:6379/0).
-Run:python automated.py
-
-
-
-Usage
-The system is triggered via a /webhook endpoint accepting POST requests with JSON payloads.
+🎮 Usage
+Trigger the system via the /webhook endpoint with POST requests.
 Webhook Payload
 {
   "action": "generateAudioVideo",
@@ -98,43 +71,39 @@ Webhook Payload
 }
 
 Supported Actions
-
-generateAudioVideo: Generates audio from an Airtable record’s text prompt and uploads it to Google Drive.
-mergeAudioVideo: Merges audio and video from an Airtable record, adds subtitles via transcription, and uploads the final video.
-
+generateAudioVideo: Generates audio from Airtable text and uploads to Google Drive.
+mergeAudioVideo: Merges audio/video, adds subtitles via transcription, and uploads.
 Workflow
-
-Send a POST request to /webhook with the desired action and record ID.
-The task is queued and processed asynchronously.
-Monitor progress and retrieve results via Airtable.
-
-Examples
-
+Send POST request to /webhook with action and record ID.
+Task is queued and processed asynchronously.
+Check progress/results in Airtable.
+🌟 Examples
 Audio Generation:
 
-Send: {"action": "generateAudioVideo", "recordId": "rec123"}.
-System generates audio using Tacotron 2 and WaveGlow, uploads it to Google Drive, and updates the Airtable record with the audio URL.
+
+Send: {"action": "generateAudioVideo", "recordId": "rec123"}
+Output: Audio generated with Tacotron 2/WaveGlow, uploaded to Google Drive, Airtable updated.
+Video with Subtitles:
 
 
-Video Merging with Subtitles:
+Send: {"action": "mergeAudioVideo", "recordId": "rec123"}
+Output: Audio/video merged, subtitles added via Whisper, uploaded, Airtable updated.
 
-Send: {"action": "mergeAudioVideo", "recordId": "rec123"}.
-System downloads audio and video, transcribes audio with Whisper, merges them with FFmpeg/MoviePy, adds subtitles, uploads the result, and updates Airtable.
-
-
-
-Contributing
-Contributions are encouraged! To contribute:
-
+🤝 Contributing
+We welcome contributions! To get started:
 Fork the repository.
-Create a feature branch (git checkout -b feature-name).
-Commit changes (git commit -m "Add feature").
+Create a feature branch: git checkout -b feature-name.
+Commit changes: git commit -m "Add feature".
 Submit a pull request.
 
-License
-This project is licensed under the MIT License.
-Acknowledgments
 
+📜 License
+This project is licensed under the MIT License.
+
+
+🙌 Acknowledgments
 AI Models: Tacotron 2, WaveGlow (NVIDIA), Whisper (OpenAI).
 Tools: FFmpeg, MoviePy, Airtable, Google Drive API.
 Libraries: Crow, Flask, Celery, Redis, LibTorch, ONNX Runtime, Transformers.
+This project highlights expertise in AI, distributed systems, and media processing, making it a strong showcase for academic or professional portfolios.
+
